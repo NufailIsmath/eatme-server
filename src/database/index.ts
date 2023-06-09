@@ -2,6 +2,9 @@ import Sequelize from 'sequelize';
 import { NODE_ENV, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from '@config';
 import UserModel from '@models/users.model';
 import { logger } from '@utils/logger';
+import RestaurantModel from '@/models/restaurants.model';
+import DishModel from '@/models/dishes.model';
+import MenuModel from '@/models/menu.model';
 
 const sequelize = new Sequelize.Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
   dialect: 'mysql',
@@ -29,6 +32,9 @@ sequelize.authenticate();
 
 export const DB = {
   Users: UserModel(sequelize),
+  Restaurants: RestaurantModel(sequelize),
+  Dishes: DishModel(sequelize),
+  Menus: MenuModel(sequelize),
   sequelize, // connection instance (RAW queries)
   Sequelize, // library
 };
