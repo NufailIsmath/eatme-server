@@ -1,6 +1,6 @@
-export interface Restaurant {
+export interface IRestaurant {
   id?: Number;
-  name1: String;
+  name: String;
   description: String;
   location: String;
   openingTime: String;

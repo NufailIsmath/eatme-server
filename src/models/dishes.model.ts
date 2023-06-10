@@ -1,10 +1,11 @@
-import { Dish } from "@/interfaces/dishes.interface";
+import { IDish } from "@/interfaces/dishes.interface";
 import { DataTypes, Model, Optional, Sequelize } from "sequelize";
 
 
-export type DishCreationAttributes = Optional<Dish, 'id' | 'name' | 'description' | 'calories' | 'price' | 'bannerImage'>;
 
-export class DishModel extends Model<Dish, DishCreationAttributes> implements Dish {
+export type DishCreationAttributes = Optional<IDish, 'id' | 'name' | 'description' | 'calories' | 'price' | 'bannerImage'>;
+
+export class Dish extends Model<IDish, DishCreationAttributes> implements IDish {
   public id: Number;
   public name: String;
   public description: String;
@@ -16,8 +17,8 @@ export class DishModel extends Model<Dish, DishCreationAttributes> implements Di
   public readonly updatedAt!: Date;
 }
 
-export default function (sequelize: Sequelize): typeof DishModel {
-    DishModel.init(
+export default function (sequelize: Sequelize): typeof Dish {
+    Dish.init(
         {
             id: {
                 autoIncrement: true,
@@ -47,9 +48,11 @@ export default function (sequelize: Sequelize): typeof DishModel {
         },
         {
             tableName: 'dishes',
-            sequelize
+            sequelize,
         }
     );
 
-    return DishModel;
+
+
+    return Dish;
 }

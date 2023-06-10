@@ -29,9 +29,7 @@ export class UserService {
   }
 
   public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {
-    const findUser: User = await DB.Users.findByPk(userId);
-    if (!findUser) throw new HttpException(409, "User doesn't exist");
-
+    
     const hashedPassword = await hash(userData.password, 10);
     await DB.Users.update({ ...userData, password: hashedPassword }, { where: { id: userId } });
 

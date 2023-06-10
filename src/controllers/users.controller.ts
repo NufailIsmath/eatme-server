@@ -3,6 +3,7 @@ import { Container } from 'typedi';
 import { CreateUserDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import { UserService } from '@services/users.service';
+import { RequestWithUser } from '@/interfaces/auth.interface';
 
 export class UserController {
   public user = Container.get(UserService);
@@ -39,9 +40,9 @@ export class UserController {
     }
   };
 
-  public updateUser = async (req: Request, res: Response, next: NextFunction) => {
+  public updateUser = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
-      const userId = Number(req.params.id);
+      const userId = Number(req.user.id);
       const userData: CreateUserDto = req.body;
       const updateUserData: User = await this.user.updateUser(userId, userData);
 

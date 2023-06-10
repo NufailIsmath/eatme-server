@@ -1,4 +1,4 @@
-export interface Dish {
+export interface IDish {
     id?: Number;
     name: String;
     description: String;

@@ -1,4 +1,4 @@
-export interface Menu {
+export interface IMenu {
     id?: Number;
-    name2: String;
+    name: String;
 }

@@ -1,12 +1,13 @@
 import { Sequelize, DataTypes, Model, Optional } from 'sequelize';
-import { Restaurant } from '@/interfaces/restaurants.interface';
-import { MenuModel } from './menu.model';
+import { IRestaurant } from '@/interfaces/restaurants.interface';
+import { Menu } from './menu.model';
 
-export type RestaurantCreationAttributes = Optional<Restaurant, 'id' | 'name1'| 'description' | 'location' | 'openingTime' | 'closingTime' | 'deliveryPrice' | 'minimumOnlinePrice'>;
 
-export class RestaurantModel extends Model<Restaurant, RestaurantCreationAttributes> implements Restaurant {
+export type RestaurantCreationAttributes = Optional<IRestaurant, 'id' | 'name'| 'description' | 'location' | 'openingTime' | 'closingTime' | 'deliveryPrice' | 'minimumOnlinePrice'>;
+
+export class Restaurant extends Model<IRestaurant, RestaurantCreationAttributes> implements IRestaurant {
   public id: Number;
-  public name1: String;
+  public name: String;
   public description: String;
   public location: String;
   public openingTime: String;
@@ -18,14 +19,14 @@ export class RestaurantModel extends Model<Restaurant, RestaurantCreationAttribu
   public readonly updatedAt!: Date;
 }
 
-export default function (sequelize: Sequelize): typeof RestaurantModel {
-    RestaurantModel.init({
+export default function (sequelize: Sequelize): typeof Restaurant {
+    Restaurant.init({
       id: {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      name1: {
+      name: {
         allowNull: false,
         type: DataTypes.STRING(45),
       },
@@ -60,7 +61,7 @@ export default function (sequelize: Sequelize): typeof RestaurantModel {
       }
     );
     
-    //RestaurantModel.hasMany(MenuModel);
+    Restaurant.hasMany(Menu);
 
-    return RestaurantModel;
+    return Restaurant;
 }
