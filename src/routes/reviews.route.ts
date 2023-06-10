@@ -11,6 +11,10 @@ export class ReviewRoute implements Routes {
     public review = new ReviewController();
 
 
+    constructor() {
+        this.initializeRoutes();
+    }
+
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.review.getReviews);
         this.router.get(`${this.path}/:id(\\d+)`, this.review.getReviewsById);
