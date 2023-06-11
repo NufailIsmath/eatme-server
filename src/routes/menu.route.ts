@@ -19,6 +19,6 @@ export class MenuRoute implements Routes {
     this.router.get(`${this.path}/:id(\\d+)`, this.menu.getMenuById);
     this.router.post(`${this.path}`, ValidationMiddleware(CreateMenuDTO, 'body'), this.menu.createMenu);
     this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(CreateMenuDTO, 'body'), this.menu.updateMenu);
-    this.router.delete(`${this.path}/:id(\d+)`, this.menu.deleteMenu);
+    this.router.delete(`${this.path}/:id(\\d+)`, this.menu.deleteMenu);
   }
 }

@@ -1,5 +1,6 @@
 import { IReview } from '@/interfaces/reviews.interface';
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { Dish } from './dishes.model';
 
 export type ReviewCreationAttributes = Optional<IReview, 'id' | 'rating' | 'comment'>;
 
@@ -30,7 +31,7 @@ export default function (sequelize: Sequelize): typeof Review {
       },
     },
     {
-      tableName: 'reviews',
+      tableName: 'review',
       sequelize,
     },
   );

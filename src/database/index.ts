@@ -33,10 +33,10 @@ sequelize.authenticate();
 
 export const DB = {
   Users: UserModel(sequelize),
-  Restaurants: Restaurant(sequelize),
+  Reviews: Review(sequelize),
   Dishes: Dish(sequelize),
   Menus: Menu(sequelize),
-  Reviews: Review(sequelize),
+  Restaurants: Restaurant(sequelize),
   sequelize, // connection instance (RAW queries)
   Sequelize, // library
 };

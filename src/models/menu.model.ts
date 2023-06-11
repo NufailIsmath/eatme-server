@@ -1,6 +1,7 @@
 import { IMenu } from '@/interfaces/menu.interface';
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { Restaurant } from './restaurants.model';
+import { Dish } from './dishes.model';
 
 export type MenuCreationAttributes = Optional<IMenu, 'id' | 'name'>;
 
@@ -28,8 +29,8 @@ export default function (sequelize: Sequelize): typeof Menu {
     },
   );
 
-  
-   Menu.belongsTo(Restaurant);
+  Menu.hasMany(Dish);
+   //Menu.belongsTo(Restaurant);
 
   return Menu;
 }

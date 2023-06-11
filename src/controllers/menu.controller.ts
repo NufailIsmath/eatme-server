@@ -42,6 +42,7 @@ export class MenuController {
 
   public updateMenu = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log(req.params.id)
       const menuId = Number(req.params.id);
       const menuData: CreateMenuDTO = req.body;
       const updateMenuData: IMenu = await this.menu.updateMenu(menuId, menuData);

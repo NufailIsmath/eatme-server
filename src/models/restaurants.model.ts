@@ -56,7 +56,7 @@ export default function (sequelize: Sequelize): typeof Restaurant {
       },
     },
       {
-        tableName: 'restaurants',
+        tableName: 'restaurant',
         sequelize
       }
     );
