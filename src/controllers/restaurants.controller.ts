@@ -8,8 +8,6 @@ import { Container } from 'typedi';
 
 export class RestaurantController {
   public restaurant = Container.get(RestaurantService);
-  public menu = Container.get(MenuService);
-  public dish = Container.get(DishService);
 
   public getRestaurants = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -35,8 +33,6 @@ export class RestaurantController {
   public getRestaurantFoodData = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const restaurantId = Number(req.params.id);
-      //const findMenusOfRestaurant = await this.menu.findMenuByRestaurantId(restaurantId);
-     // const findDishesOfMenu = await this.dish.findDishByMenuId
      const data = await this.restaurant.findRestaurantFoods(restaurantId);
      res.status(200).json({ data: data, message: 'findMenuReviews' });
     } catch (error) {
