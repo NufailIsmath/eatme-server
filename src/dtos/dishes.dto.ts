@@ -21,4 +21,8 @@ export class CreateDishesDTO {
   @IsString()
   @IsNotEmpty()
   public bannerImage: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  public menu_id: number;
 }

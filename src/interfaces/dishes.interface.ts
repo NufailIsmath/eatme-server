@@ -5,4 +5,5 @@ export interface IDish {
     calories: Number;
     price: Number;
     bannerImage: String;
+    menu_id: Number;
 }

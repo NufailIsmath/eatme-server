@@ -1,6 +1,7 @@
 import { RestaurantController } from "@/controllers/restaurants.controller";
 import { CreateRestaurantDTO } from "@/dtos/restaurant.dto";
 import { Routes } from "@/interfaces/routes.interface";
+import { AuthMiddleware } from "@/middlewares/auth.middleware";
 import { ValidationMiddleware } from "@/middlewares/validation.middleware";
 import { Router } from "express";
 
@@ -20,5 +21,6 @@ export class RestaurantRoute implements Routes {
         this.router.post(`${this.path}`, ValidationMiddleware(CreateRestaurantDTO, 'body'), this.restaurant.createRestaurant);
         this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(CreateRestaurantDTO, 'body'), this.restaurant.updateRestaurant);
         this.router.delete(`${this.path}/:id(\d+)`, this.restaurant.deleteRestaurant);
+        this.router.get(`${this.path}/menu/:id(\\d+)`, AuthMiddleware, this.restaurant.getRestaurantFoodData);
     }
 }

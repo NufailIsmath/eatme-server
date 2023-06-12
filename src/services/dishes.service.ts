@@ -18,6 +18,11 @@ export class DishService {
     return findDish;
   }
 
+  public async findDishByMenuId(menuId: number): Promise<IDish[]> {
+    const findDishByMId: IDish[] = await DB.Dishes.findAll({where: {menu_id: menuId}});
+    return findDishByMId;
+  }
+
   public async createDish(dishData: CreateDishesDTO): Promise<IDish> {
     const findDish: IDish = await DB.Dishes.findOne({ where: { name: dishData.name } });
     if (findDish) throw new HttpException(409, `This dish ${dishData.name} already exists`);

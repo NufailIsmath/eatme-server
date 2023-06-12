@@ -1,6 +1,7 @@
 import { IDish } from '@/interfaces/dishes.interface';
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { Review } from './review.model';
+import { Menu } from './menu.model';
 
 export type DishCreationAttributes = Optional<IDish, 'id' | 'name' | 'description' | 'calories' | 'price' | 'bannerImage'>;
 
@@ -11,9 +12,14 @@ export class Dish extends Model<IDish, DishCreationAttributes> implements IDish 
   public calories: Number;
   public price: Number;
   public bannerImage: String;
+  public menu_id: Number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public static associate(): void {
+    Dish.belongsTo(Menu, { foreignKey: 'menu_id' });
+  }
 }
 
 export default function (sequelize: Sequelize): typeof Dish {
@@ -44,6 +50,10 @@ export default function (sequelize: Sequelize): typeof Dish {
         allowNull: false,
         type: DataTypes.STRING,
       },
+      menu_id: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
     },
     {
       tableName: 'dish',
@@ -52,6 +62,7 @@ export default function (sequelize: Sequelize): typeof Dish {
   );
 
   Dish.hasMany(Review);
+  //Review.belongsTo(Dish)
 
   //Review.belongsTo(Dish)
 

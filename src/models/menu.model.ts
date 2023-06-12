@@ -8,7 +8,14 @@ export type MenuCreationAttributes = Optional<IMenu, 'id' | 'name'>;
 export class Menu extends Model<IMenu, MenuCreationAttributes> implements IMenu {
   id?: Number;
   name: String;
+  restaurant_id: Number;
+
+  public static associate(): void {
+      Menu.belongsTo(Restaurant, {foreignKey: 'restaurant_id'});
+  }
 }
+
+
 
 export default function (sequelize: Sequelize): typeof Menu {
   Menu.init(
@@ -22,6 +29,10 @@ export default function (sequelize: Sequelize): typeof Menu {
         allowNull: false,
         type: DataTypes.STRING(45),
       },
+      restaurant_id: {
+        allowNull: false,
+        type: DataTypes.STRING(45),
+      },
     },
     {
       tableName: 'menu',
@@ -30,6 +41,7 @@ export default function (sequelize: Sequelize): typeof Menu {
   );
 
   Menu.hasMany(Dish);
+  //Dish.belongsTo(Menu);
    //Menu.belongsTo(Restaurant);
 
   return Menu;

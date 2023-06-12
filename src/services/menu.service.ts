@@ -23,9 +23,15 @@ export class MenuService {
     const findMenu: IMenu = await DB.Menus.findOne({ where: { name: menuData.name } });
     if (findMenu) throw new HttpException(409, `This restaurant ${menuData.name} already exists`);
 
-    const createMenuData: IMenu = await DB.Menus.create({ ...menuData });
+    const createMenuData: IMenu = await DB.Menus.create({ ...menuData, restaurant_id: menuData.restaurant_id });
 
     return createMenuData;
+  }
+
+  public async findMenuByRestaurantId(restaurantId: number): Promise<IMenu[]> {
+    const findMenByRId: IMenu[] = await DB.Menus.findAll({where: {restaurant_id: restaurantId}});
+
+    return findMenByRId;
   }
 
   public async updateMenu(menuId: number, menuData: CreateMenuDTO): Promise<IMenu> {

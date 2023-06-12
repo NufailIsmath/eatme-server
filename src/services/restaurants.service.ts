@@ -18,6 +18,25 @@ export class RestaurantService {
     return findRestaurant;
   }
 
+  public async findRestaurantFoods(restaurantId: number): Promise<any> {
+    const findData = await DB.Menus.findOne({
+      where: {restaurant_id: restaurantId},
+      include: [
+        {
+          model:DB.Dishes,
+          include: [
+            {
+              model: DB.Reviews
+            }
+          ]
+        }
+      ]
+    }) 
+
+    if (!findData) throw new HttpException(404, 'Menu not found');
+    return findData;
+  }
+
   public async createRestaurant(restaurantData: CreateRestaurantDTO): Promise<IRestaurant> {
     const findRestaurant: IRestaurant = await DB.Restaurants.findOne({ where: { name: restaurantData.name } });
     if (findRestaurant) throw new HttpException(409, `This restaurant ${restaurantData.name} already exists`);

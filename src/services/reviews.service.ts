@@ -18,6 +18,11 @@ export class ReviewService {
     return findReview;
   }
 
+  public async findReveiwsByDishId(dishId: number): Promise<IReview[]> {
+    const findReveiwsByDId: IReview[] = await DB.Reviews.findAll({where: {dish_id: dishId}});
+    return findReveiwsByDId;
+  }
+
   public async createReview(reviewData: CreateReviewDTO): Promise<IReview> {
     const createReviewData: IReview = await DB.Reviews.create({ ...reviewData });
 

@@ -62,6 +62,7 @@ export default function (sequelize: Sequelize): typeof Restaurant {
     );
     
     Restaurant.hasMany(Menu);
+    
 
     return Restaurant;
 }

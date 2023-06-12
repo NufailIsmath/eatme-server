@@ -8,9 +8,14 @@ export class Review extends Model<IReview, ReviewCreationAttributes> implements 
   public id: Number;
   public rating: Number;
   public comment: String;
+  public dish_id: Number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public static associate(): void {
+    Review.belongsTo(Dish, { foreignKey: 'dish_id' });
+  }
 }
 
 export default function (sequelize: Sequelize): typeof Review {
@@ -28,6 +33,10 @@ export default function (sequelize: Sequelize): typeof Review {
       comment: {
         allowNull: false,
         type: DataTypes.STRING,
+      },
+      dish_id: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
       },
     },
     {
